@@ -1,12 +1,10 @@
 package com.kelompokNizarBersaudara.krambilsawit
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
@@ -14,7 +12,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
-import com.kelompokNizarBersaudara.krambilsawit.Model.BlogPost
+import com.kelompokNizarBersaudara.krambilsawit.model.BlogPost
 import com.kelompokNizarBersaudara.krambilsawit.databinding.ArticleItemRowBinding
 
 class BlogPostAdapter(

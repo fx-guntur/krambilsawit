@@ -1,4 +1,4 @@
-package com.kelompokNizarBersaudara.krambilsawit.Model
+package com.kelompokNizarBersaudara.krambilsawit.model
 
 data class BlogPost(
     val title: String? = null,

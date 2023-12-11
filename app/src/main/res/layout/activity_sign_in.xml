@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
@@ -9,7 +10,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:scrollbars="none"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        tools:ignore="UselessParent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,9 +22,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="23dp"
-                android:layout_marginRight="23.2dp"
-                android:orientation="vertical">
+                android:layout_marginStart="23dp"
+                android:layout_marginEnd="23.2dp"
+                android:orientation="vertical"
+                tools:ignore="UselessParent">
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:layout_width="200dp"
@@ -38,7 +41,7 @@
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/poppins_semibold"
                     android:letterSpacing="0.0325"
-                    android:text="Sign In"
+                    android:text="@string/sign_in"
                     android:textColor="#464646"
                     android:textAlignment="center"
                     android:textSize="20sp" />
@@ -48,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins"
                     android:letterSpacing="0.0325"
-                    android:text="Silahkan Sign In"
+                    android:text="@string/desc_sign_in"
                     android:textColor="#464646"
                     android:textAlignment="center"
                     android:textSize="12sp" />
@@ -59,11 +62,11 @@
                     android:layout_marginTop="15.5dp"
                     android:fontFamily="@font/poppins_medium"
                     android:letterSpacing="0.0325"
-                    android:text="Email"
+                    android:text="@string/email"
                     android:textColor="#464646"
                     android:textSize="16.7sp" />
 
-                <TextView
+                <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="13.5dp"
@@ -71,10 +74,11 @@
                     android:id="@+id/user_email"
                     android:fontFamily="@font/poppins"
                     android:letterSpacing="0.0325"
-                    android:hint="nama@krambilsawit.id"
+                    android:hint="@string/placeholder_email"
                     android:background="@android:color/transparent"
                     android:textColor="#464646"
-                    android:textSize="12.3sp" />
+                    android:textSize="12.3sp"
+                    android:inputType="textEmailAddress" />
 
                 <View
                     android:layout_width="match_parent"
@@ -87,7 +91,7 @@
                     android:layout_marginTop="15.5dp"
                     android:fontFamily="@font/poppins_medium"
                     android:letterSpacing="0.0325"
-                    android:text="Password"
+                    android:text="@string/password"
                     android:textColor="#464646"
                     android:textSize="16.7sp" />
 
@@ -97,10 +101,11 @@
                     android:layout_marginBottom="13.5dp"
                     android:layout_marginTop="7dp"
                     android:id="@+id/user_password"
+                    android:inputType="textPassword"
                     android:background="@android:color/transparent"
                     android:fontFamily="@font/poppins"
                     android:letterSpacing="0.0325"
-                    android:hint="**********"
+                    android:hint="@string/placeholder_password"
                     android:textColor="#464646"
                     android:textSize="12.3sp" />
 
@@ -119,7 +124,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="45dp"
-                    android:text="Sign In"
+                    android:text="@string/sign_in"
                     android:fontFamily="@font/poppins_medium"
                     android:textAlignment="center"/>
 
@@ -132,14 +137,15 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Don't have an account ? "
-                        android:fontFamily="@font/poppins"/>
+                        android:text="@string/text_dont_account"
+                        android:fontFamily="@font/poppins"
+                        android:paddingEnd="8dp"
+                        tools:ignore="RtlSymmetry" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/tv_signUp"
-                        android:text="Sign Up"
-                        android:paddingStart="8dp"
+                        android:text="@string/sign_up"
                         android:textColor="@color/colorPrimary"
                         android:fontFamily="@font/poppins_semibold" />
                 </LinearLayout>
@@ -157,7 +163,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Or"
+                        android:text="@string/or"
                         android:layout_marginHorizontal="10dp"
                         android:fontFamily="@font/poppins"/>
                     <View
@@ -167,6 +173,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/tv_google"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_red"
@@ -178,14 +185,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/google"
+                        android:paddingEnd="10dp"
                         app:tint="@color/white"
-                        android:paddingEnd="10dp"/>
+                        android:contentDescription="@string/google" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
                         android:gravity="center"
-                        android:text="Sign In With Google"
+                        android:text="@string/sign_in_with_google"
                         android:textColor="@color/white"
                         android:textSize="15sp" />
                 </LinearLayout>

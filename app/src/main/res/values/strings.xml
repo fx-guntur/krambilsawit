@@ -21,5 +21,14 @@
     <string name="name">Name</string>
     <string name="placeholder_name">Krambil Sawit</string>
     <string name="email">Email</string>
+    <string name="placeholder_email">nama@krambilsawit.id</string>
+    <string name="password">Password</string>
+    <string name="placeholder_password">**********</string>
+    <string name="sign_in">Sign In</string>
+    <string name="desc_sign_in">Silahkan Sign In</string>
+    <string name="text_dont_account">Don\'t have an account ?</string>
+    <string name="sign_in_with_google">Sign In With Google</string>
+    <string name="or">Or</string>
+    <string name="google">google</string>
 
 </resources>
