@@ -16,5 +16,10 @@
     <string name="judul_artikel">Judul artikel</string>
     <string name="deskripsi_artikel">Deskripsi Artikel</string>
     <string name="back">Back</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="desc_sign_up">Silahkan Sign Up Akun</string>
+    <string name="name">Name</string>
+    <string name="placeholder_name">Krambil Sawit</string>
+    <string name="email">Email</string>
 
 </resources>

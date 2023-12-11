@@ -15,57 +15,31 @@ import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.kelompokNizarBersaudara.krambilsawit.Model.BlogPost
+import com.kelompokNizarBersaudara.krambilsawit.databinding.ArticleItemRowBinding
 
 class BlogPostAdapter(
-    private val option: FirebaseRecyclerOptions<BlogPost>,
+    private val options: FirebaseRecyclerOptions<BlogPost>,
     private val currentUsername: String?
 ) : FirebaseRecyclerAdapter<BlogPost, ViewHolder>(options) {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.image_message, parent, false)
-        val binding = ImageMessageBinding.bind(view)
-        ImageMessageViewHolder(binding)
+        val view = inflater.inflate(R.layout.article_item_row, parent, false)
+        val binding = ArticleItemRowBinding.bind(view)
+        return ArticleItemRowViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int, model: BlogPost) {
-        (holder as ImageMessageViewHolder).bind(model)
+        (holder as ArticleItemRowViewHolder).bind(model)
     }
 
-    inner class MessageViewHolder(private val binding: MessageBinding) : ViewHolder(binding.root) {
-        fun bind(item: BlogPost) {
-            binding.messageTextView.title = item.title
-            setTextColor(item.name, binding.messageTextView)
-
-            binding.messengerTextView.text = item.name ?: ANONYMOUS
-            if (item.photoUrl != null) {
-                loadImageIntoView(binding.messengerImageView, item.photoUrl)
-            } else {
-                binding.messengerImageView.setImageResource(R.drawable.ic_account_circle_black_36dp)
-            }
-        }
-
-        private fun setTextColor(userName: String?, textView: TextView) {
-            if (userName != ANONYMOUS && currentUserName == userName && userName != null) {
-                textView.setBackgroundResource(R.drawable.rounded_message_blue)
-                textView.setTextColor(Color.WHITE)
-            } else {
-                textView.setBackgroundResource(R.drawable.rounded_message_gray)
-                textView.setTextColor(Color.BLACK)
-            }
-        }
-    }
-
-    inner class ImageMessageViewHolder(private val binding: ImageMessageBinding) :
+    inner class ArticleItemRowViewHolder(private val binding: ArticleItemRowBinding) :
         ViewHolder(binding.root) {
-        fun bind(item: FriendlyMessage) {
-            loadImageIntoView(binding.messageImageView, item.imageUrl!!)
+        fun bind(item: BlogPost) {
+            loadImageIntoView(binding.imgItemPhoto, item.thumbnail!!)
 
-            binding.messengerTextView.text = item.name ?: ANONYMOUS
-            if (item.photoUrl != null) {
-                loadImageIntoView(binding.messengerImageView, item.photoUrl)
-            } else {
-                binding.messengerImageView.setImageResource(R.drawable.ic_account_circle_black_36dp)
-            }
+            binding.tvJudul.text = item.title!!
+            binding.tvDesc.text = item.desc!!
         }
     }
 
