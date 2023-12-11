@@ -15,5 +15,6 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="judul_artikel">Judul artikel</string>
     <string name="deskripsi_artikel">Deskripsi Artikel</string>
+    <string name="back">Back</string>
 
 </resources>
