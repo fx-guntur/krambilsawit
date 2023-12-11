@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "619298383692",
+    "firebase_url": "https://krambil-sawit-default-rtdb.firebaseio.com",
+    "project_id": "krambil-sawit",
+    "storage_bucket": "krambil-sawit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619298383692:android:3b0cf6c8cf0ea0d1f5d1e9",
+        "android_client_info": {
+          "package_name": "com.kelompokNizarBersaudara.krambilsawit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "619298383692-out5nlsptpdajdq0qegfba8pog97q4an.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDV70ZLprdQZtawWl6J97PJAZOdous-YF8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "619298383692-out5nlsptpdajdq0qegfba8pog97q4an.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
