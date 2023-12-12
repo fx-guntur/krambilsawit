@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/mobile_navigation">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/homeFragment">
 
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.kelompokNizarBersaudara.krambilsawit.dashboard.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <activity
+        android:id="@+id/signInActivity"
+        android:name="com.kelompokNizarBersaudara.krambilsawit.SignInActivity"
+        android:label="SignInActivity" />
+    <activity
+        android:id="@+id/signUpActivity"
+        android:name="com.kelompokNizarBersaudara.krambilsawit.SignUpActivity"
+        android:label="SignUpActivity" />
 </navigation>

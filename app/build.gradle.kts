@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.gms.google-services")
+//    id("kotlin-android-extensions")
 }
 
 android {
@@ -20,10 +21,6 @@ android {
 
     buildFeatures {
         viewBinding = true
-    }
-
-    lint {
-        disable += "NotificationPermission"
     }
 
     buildTypes {
@@ -48,7 +45,7 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.16.0")
 
     // Firebase
-    implementation(platform("com.google.firebase:firebase-bom:32.6.0"))
+    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
     implementation("com.google.firebase:firebase-database-ktx")
     implementation("com.google.firebase:firebase-storage-ktx")
     implementation("com.google.firebase:firebase-auth-ktx")

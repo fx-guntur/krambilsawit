@@ -23,12 +23,17 @@
     <string name="email">Email</string>
     <string name="placeholder_email">nama@krambilsawit.id</string>
     <string name="password">Password</string>
-    <string name="placeholder_password">**********</string>
+    <string name="placeholder_password">password</string>
     <string name="sign_in">Sign In</string>
     <string name="desc_sign_in">Silahkan Sign In</string>
     <string name="text_dont_account">Don\'t have an account ?</string>
+    <string name="text_have_account">Already have an account?</string>
     <string name="sign_in_with_google">Sign In With Google</string>
     <string name="or">Or</string>
     <string name="google">google</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="placeholder_confirm_password">confirm password</string>
 
 </resources>
