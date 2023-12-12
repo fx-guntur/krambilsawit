@@ -24,7 +24,7 @@
             android:id="@+id/tv_judul"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="2dp"
             android:text="@string/judul_artikel"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -35,7 +35,16 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="2"
+            android:layout_marginBottom="8dp"
             android:text="@string/deskripsi_artikel" />
+
+        <TextView
+            android:id="@+id/tv_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@string/tag" />
 
     </LinearLayout>
 
