@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
+    tools:openDrawer="start"
     tools:context=".MainActivity">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -14,7 +15,8 @@
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|enterAlways|snap">
+            app:expandedTitleGravity="top"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
@@ -23,7 +25,6 @@
                 android:minHeight="?attr/actionBarSize"
                 app:title="@string/app_name"
                 app:titleCentered="true"
-                app:menu="@menu/top_menu"
                 app:navigationIcon="@drawable/baseline_dehaze_24" />
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -34,7 +35,7 @@
             android:id="@+id/container"
             app:defaultNavHost="true"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:navGraph="@navigation/main_navigation" />
+            app:navGraph="@navigation/mobile_navigation" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.navigation.NavigationView

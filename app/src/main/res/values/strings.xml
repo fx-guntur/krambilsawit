@@ -40,5 +40,8 @@
     <string name="tag">tag</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
+    <string name="default_web_client_id">619298383692-lclg8es39dnvc6srak1unh34fgebgurv.apps.googleusercontent.com</string>
+    <string name="logout">Logout</string>
+    <string name="account">Account</string>
 
 </resources>

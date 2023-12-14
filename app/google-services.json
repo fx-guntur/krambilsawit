@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "619298383692-lclg8es39dnvc6srak1unh34fgebgurv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kelompokNizarBersaudara.krambilsawit",
+            "certificate_hash": "0c3e17fb763e55fd9f3ff70002e419a047eb2c37"
+          }
+        },
+        {
           "client_id": "619298383692-out5nlsptpdajdq0qegfba8pog97q4an.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -16,4 +16,15 @@
                 android:checkable="true" />
         </menu>
     </item>
+    <item
+        android:id="@+id/account_item"
+        android:title="@string/account">
+        <menu>
+            <item
+                android:id="@+id/logout_item"
+                android:icon="@drawable/baseline_logout_24"
+                android:title="@string/logout"
+                android:checkable="true"/>
+        </menu>
+    </item>
 </menu>
