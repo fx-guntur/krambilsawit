@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".dashboard.ArticleDetail">
+    tools:context=".dashboard.ArticleDetail"
+    >
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageView"
@@ -39,13 +40,15 @@
 
             <TextView
                 android:id="@+id/tv_judul_artikel"
+                android:fontFamily="@font/poppins_extrabold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:paddingLeft="20dp"
                 android:text="@string/judul_artikel"
 
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="RtlHardcoded,RtlSymmetry" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -56,6 +59,7 @@
                     android:id="@+id/tv_tanggal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
                     android:layout_marginTop="2dp"
                     android:paddingLeft="20dp"
                     android:text="@string/tanggal" />
@@ -70,6 +74,7 @@
 
                 <TextView
                     android:id="@+id/tv_tag"
+                    android:fontFamily="@font/poppins_extralight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
@@ -81,6 +86,7 @@
                 android:id="@+id/tv_desc_artikel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
                 android:layout_marginTop="8dp"
                 android:text="@string/deskripsi_artikel" />
 

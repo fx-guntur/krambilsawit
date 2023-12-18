@@ -43,6 +43,10 @@
     <string name="default_web_client_id">619298383692-lclg8es39dnvc6srak1unh34fgebgurv.apps.googleusercontent.com</string>
     <string name="logout">Logout</string>
     <string name="account">Account</string>
+    <string name="upload_foto">Upload Foto</string>
+    <string name="masukkan_isi_artikel">Masukkan isi artikel</string>
+    <string name="post_now">Post Now</string>
+    <string name="isi_artikel">Isi Artikel</string>
     <string name="home">Home</string>
 
 </resources>
