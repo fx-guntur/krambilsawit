@@ -3,19 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/nav_home">
 
     <fragment
-        android:id="@+id/homeFragment"
+        android:id="@+id/nav_home"
         android:name="com.kelompokNizarBersaudara.krambilsawit.dashboard.HomeFragment"
-        android:label="fragment_home"
+        android:label="@string/app_name"
         tools:layout="@layout/fragment_home" />
-    <activity
-        android:id="@+id/signInActivity"
-        android:name="com.kelompokNizarBersaudara.krambilsawit.SignInActivity"
-        android:label="SignInActivity" />
-    <activity
-        android:id="@+id/signUpActivity"
-        android:name="com.kelompokNizarBersaudara.krambilsawit.SignUpActivity"
-        android:label="SignUpActivity" />
+    <fragment
+        android:id="@+id/nav_post"
+        android:name="com.kelompokNizarBersaudara.krambilsawit.dashboard.Post"
+        android:label="Article"
+        tools:layout="@layout/fragment_post" />
+    <fragment
+        android:id="@+id/nav_article_detail"
+        android:name="com.kelompokNizarBersaudara.krambilsawit.dashboard.ArticleDetail"
+        android:label="Article Detail"
+        tools:layout="@layout/fragment_article_detail" />
 </navigation>
