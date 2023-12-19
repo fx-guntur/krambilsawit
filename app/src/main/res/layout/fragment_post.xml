@@ -1,113 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".dashboard.Post">
+    android:background="#ffffff"
+    android:orientation="vertical"
+    tools:context=".dashboard.PostFragment">
 
-
-    <EditText
-        android:id="@+id/editText"
+    <ScrollView
         android:layout_width="match_parent"
+        android:scrollbars="none"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="18dp"
-        android:layout_marginVertical="16dp"
-        android:background="@drawable/rounded_edittext_background"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/poppins"
-        android:text="@string/judul_artikel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.06" />
-
-    <TextView
-        android:id="@+id/upload_file"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins"
-        android:text="@string/upload_foto"
-
-        android:layout_marginVertical="16dp"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
-
-    <LinearLayout
-        android:id="@+id/upload_foto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:gravity="end"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/upload_file">
+        tools:ignore="UselessParent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="18dp"
-            android:layout_marginVertical="16dp"
-            android:layout_marginTop="59dp"
-            android:background="@drawable/rounded_edittext_background"
-            android:clickable="true"
-            android:gravity="end"
-            android:orientation="horizontal">
+            android:layout_marginStart="23dp"
+            android:layout_marginEnd="23.2dp"
+            android:orientation="vertical"
+            android:paddingVertical="20dp">
 
-            <ImageView
-                android:id="@+id/imageView7"
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/baseline_upload_file_24" />
+                android:hint="@string/judul_artikel"
+                android:fontFamily="@font/poppins_medium"
+                app:endIconMode="clear_text"
+                android:layout_marginTop="15.5dp">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/judul_artikel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:fontFamily="@font/poppins"
+                    android:textSize="12.3sp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Kategori"
+                android:fontFamily="@font/poppins_medium"
+                app:endIconMode="dropdown_menu"
+                android:layout_marginTop="15.5dp"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+
+                <AutoCompleteTextView
+                    android:id="@+id/kategori_artikel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    app:simpleItems="@array/tag_article"
+                    android:fontFamily="@font/poppins"
+                    android:textSize="12.3sp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/upload_foto"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15.5dp"
+                android:textSize="15sp"
+                android:text="@string/upload_foto"
+                android:fontFamily="@font/poppins_medium"
+                android:textAlignment="center"
+                app:iconTint="@color/colorPrimary"
+                app:icon="@drawable/baseline_upload_file_24"/>
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:src="@drawable/pantai"
+                android:layout_marginTop="15.5dp"
+                android:visibility="gone"
+                app:shapeAppearanceOverlay="@style/RoundedSquare"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/isi_artikel"
+                android:fontFamily="@font/poppins_medium"
+                app:endIconMode="none"
+                android:layout_marginTop="15.5dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/isi_artikel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="150dp"
+                    android:inputType="textMultiLine"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="start"
+                    android:textSize="12.3sp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/tv_submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:layout_marginTop="28dp"
+                android:textSize="15sp"
+                android:text="@string/post_now"
+                android:fontFamily="@font/poppins_medium"
+                android:textAlignment="center" />
         </LinearLayout>
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/isi_artikel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins"
-        android:text="@string/isi_artikel"
-        android:layout_marginVertical="16dp"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/upload_foto" />
-
-    <EditText
-        android:id="@+id/et_isi_artikel"
-        android:layout_width="match_parent"
-        android:layout_height="270dp"
-        android:layout_marginHorizontal="18dp"
-        android:layout_marginVertical="16dp"
-        android:background="@drawable/rounded_edittext_background"
-        android:inputType="text"
-        android:fontFamily="@font/poppins"
-        android:gravity="top|center_vertical"
-        android:hint="@string/masukkan_isi_artikel"
-        android:textColor="@color/grey_60"
-        app:layout_constraintTop_toBottomOf="@id/isi_artikel"
-        />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="25dp"
-        android:layout_marginVertical="16dp"
-        android:background="@drawable/rounded_edittext_background"
-        android:text="@string/post_now"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_isi_artikel" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</RelativeLayout>

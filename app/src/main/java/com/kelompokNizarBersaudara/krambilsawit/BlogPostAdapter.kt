@@ -16,8 +16,7 @@ import com.kelompokNizarBersaudara.krambilsawit.model.BlogPost
 import com.kelompokNizarBersaudara.krambilsawit.databinding.ArticleItemRowBinding
 
 class BlogPostAdapter(
-    private val options: FirebaseRecyclerOptions<BlogPost>,
-    private val currentUsername: String?
+    private val options: FirebaseRecyclerOptions<BlogPost>
 ) : FirebaseRecyclerAdapter<BlogPost, ViewHolder>(options) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -41,7 +40,7 @@ class BlogPostAdapter(
         }
     }
 
-    private fun loadImageIntoView(view: ImageView, url: String, isCircular: Boolean = true) {
+    private fun loadImageIntoView(view: ImageView, url: String, isCircular: Boolean = false) {
         if (url.startsWith("gs://")) {
             val storageReference = Firebase.storage.getReferenceFromUrl(url)
             storageReference.downloadUrl

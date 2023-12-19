@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -14,6 +13,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.GoogleAuthProvider
 import com.kelompokNizarBersaudara.krambilsawit.databinding.ActivitySignInBinding
 import com.kelompokNizarBersaudara.krambilsawit.extensions.Extensions.toast
@@ -29,7 +29,7 @@ class SignInActivity : AppCompatActivity() {
      * 1 user_email
      * 2 user_password
      */
-    private lateinit var signInInputsArray: Array<EditText>
+    private lateinit var signInInputsArray: Array<TextInputEditText>
 
     // Google Sign In
     private lateinit var mGoogleSignInClient: GoogleSignInClient
@@ -50,6 +50,7 @@ class SignInActivity : AppCompatActivity() {
         tvSignUp.setOnClickListener {
             startActivity(Intent(this, SignUpActivity::class.java))
             finish()
+            return@setOnClickListener
         }
     }
 
@@ -85,7 +86,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun signInGoogleFirebaseContract(result: ActivityResult) {
-        if (result.resultCode == RESULT_OK && result.data != null) {
+        if (result.resultCode == RESULT_OK) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
             try {
                 val account = task.getResult(ApiException::class.java)
@@ -104,8 +105,8 @@ class SignInActivity : AppCompatActivity() {
         firebaseAuth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    goToMainActivity()
                     toast("signed in successfully")
+                    goToMainActivity()
                 } else {
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
                     toast("sign in failed")
@@ -118,16 +119,7 @@ class SignInActivity : AppCompatActivity() {
         signInPassword = signInInputsArray[1].text.toString().trim()
 
         if (notEmpty()) {
-            firebaseAuth.signInWithEmailAndPassword(signInEmail, signInPassword)
-                .addOnCompleteListener { signIn ->
-                    if (signIn.isSuccessful) {
-                        goToMainActivity()
-                        toast("signed in successfully")
-                    } else {
-                        toast("sign in failed")
-                        Log.w(TAG, "signInWithEmailAndPassword:failure")
-                    }
-                }
+            signInEmailAndPassword(signInEmail, signInPassword)
         } else {
             signInInputsArray.forEach { input ->
                 if (input.text.toString().trim().isEmpty()) {
@@ -135,6 +127,19 @@ class SignInActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun signInEmailAndPassword(email: String, password: String) {
+        firebaseAuth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener { signIn ->
+                if (signIn.isSuccessful) {
+                    toast("signed in successfully")
+                    goToMainActivity()
+                } else {
+                    toast("sign in failed")
+                    Log.w(TAG, "signInWithEmailAndPassword:failure")
+                }
+            }
     }
 
     private fun goToMainActivity() {

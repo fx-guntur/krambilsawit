@@ -40,7 +40,7 @@
     <string name="tag">tag</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
-    <string name="default_web_client_id">619298383692-lclg8es39dnvc6srak1unh34fgebgurv.apps.googleusercontent.com</string>
+    <string name="default_web_client_id">619298383692-out5nlsptpdajdq0qegfba8pog97q4an.apps.googleusercontent.com</string>
     <string name="logout">Logout</string>
     <string name="account">Account</string>
     <string name="upload_foto">Upload Foto</string>
@@ -48,5 +48,12 @@
     <string name="post_now">Post Now</string>
     <string name="isi_artikel">Isi Artikel</string>
     <string name="home">Home</string>
+    <string name="articles">Articles</string>
+    <string name="new_article">New Article</string>
+    <string-array name="tag_article">
+        <item>Kuliner</item>
+        <item>Budaya</item>
+        <item>Wisata</item>
+    </string-array>
 
 </resources>

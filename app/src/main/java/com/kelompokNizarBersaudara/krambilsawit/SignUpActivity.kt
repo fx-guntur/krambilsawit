@@ -3,8 +3,10 @@ package com.kelompokNizarBersaudara.krambilsawit
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.kelompokNizarBersaudara.krambilsawit.databinding.ActivitySignUpBinding
 import com.kelompokNizarBersaudara.krambilsawit.extensions.Extensions.toast
@@ -24,7 +26,7 @@ class SignUpActivity : AppCompatActivity() {
      * 3 user_password
      * 4 user_password_confirm
      */
-    private lateinit var signUpInputsArray: Array<EditText>
+    private lateinit var signUpInputsArray: Array<TextInputEditText>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
@@ -45,6 +47,7 @@ class SignUpActivity : AppCompatActivity() {
     public override fun onStart() {
         super.onStart()
 
+        firebaseUser?.reload()
         if (firebaseUser == null) {
             signUp()
         } else {
@@ -87,22 +90,41 @@ class SignUpActivity : AppCompatActivity() {
             signUpName = signUpInputsArray[0].text.toString().trim()
             signUpEmail = signUpInputsArray[1].text.toString().trim()
             signUpPassword = signUpInputsArray[2].text.toString().trim()
+            println(signUpEmail)
 
             firebaseAuth.createUserWithEmailAndPassword(signUpEmail, signUpPassword)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        val user = firebaseUser
-                        user?.updateProfile(
-                            UserProfileChangeRequest.Builder()
-                                .setDisplayName(signUpName)
-                                .build())
+                        signInEmailAndPassword(signUpEmail, signUpPassword)
                         toast("created account successfully !")
-                        goToSignInActivity()
                     } else {
                         toast("failed to Authenticate !")
                     }
                 }
         }
+    }
+
+    private fun signInEmailAndPassword(email: String, password: String) {
+        firebaseAuth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener { signIn ->
+                if (signIn.isSuccessful) {
+                    val user = firebaseUser
+                    user?.updateProfile(
+                        UserProfileChangeRequest.Builder()
+                            .setDisplayName(signUpName)
+                            .build())
+                    goToMainActivity()
+                } else {
+                    toast("sign in failed")
+                    Log.w(SignUpActivity.TAG, "signInWithEmailAndPassword:failure")
+                    goToSignInActivity()
+                }
+            }
+    }
+
+    private fun goToMainActivity() {
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 
     private fun goToSignInActivity() {

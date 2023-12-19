@@ -11,9 +11,18 @@
         android:label="@string/app_name"
         tools:layout="@layout/fragment_home" />
     <fragment
-        android:id="@+id/nav_post"
-        android:name="com.kelompokNizarBersaudara.krambilsawit.dashboard.Post"
+        android:id="@+id/nav_article"
+        android:name="com.kelompokNizarBersaudara.krambilsawit.dashboard.ArticleFragment"
         android:label="Article"
+        tools:layout="@layout/fragment_article">
+        <action
+            android:id="@+id/action_nav_article_to_nav_post"
+            app:destination="@id/nav_post" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_post"
+        android:name="com.kelompokNizarBersaudara.krambilsawit.dashboard.PostFragment"
+        android:label="Post Article"
         tools:layout="@layout/fragment_post" />
     <fragment
         android:id="@+id/nav_article_detail"
