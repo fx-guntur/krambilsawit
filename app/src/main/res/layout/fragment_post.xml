@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:orientation="vertical"
-    tools:context=".dashboard.PostFragment">
+    tools:context=".ui.PostFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -71,7 +71,7 @@
                 android:fontFamily="@font/poppins_medium"
                 android:textAlignment="center"
                 app:iconTint="@color/colorPrimary"
-                app:icon="@drawable/baseline_upload_file_24"/>
+                app:icon="@drawable/upload_file_24px"/>
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imageView"

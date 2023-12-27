@@ -1,12 +1,15 @@
 package com.kelompokNizarBersaudara.krambilsawit
 
+import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.provider.MediaStore
 import androidx.activity.result.contract.ActivityResultContract
-import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 
 class MyOpenDocumentContract : ActivityResultContract<Array<String>, Uri?>() {
     override fun createIntent(context: Context, input: Array<String>): Intent {
@@ -19,6 +22,9 @@ class MyOpenDocumentContract : ActivityResultContract<Array<String>, Uri?>() {
 
         val chooserIntent = Intent.createChooser(documentIntent, "Pilih Sumber Gambar")
         chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, arrayOf(captureIntent))
+        if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(context as Activity, arrayOf(android.Manifest.permission.CAMERA), CAMERA_PERMISSION_REQUEST_CODE)
+        }
         return chooserIntent
     }
 
@@ -27,5 +33,9 @@ class MyOpenDocumentContract : ActivityResultContract<Array<String>, Uri?>() {
             return intent?.data
         }
         return null
+    }
+
+    companion object {
+        private const val CAMERA_PERMISSION_REQUEST_CODE = 1001
     }
 }

@@ -1,15 +1,14 @@
-package com.kelompokNizarBersaudara.krambilsawit.dashboard
+package com.kelompokNizarBersaudara.krambilsawit.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.kelompokNizarBersaudara.krambilsawit.R
-import com.kelompokNizarBersaudara.krambilsawit.databinding.FragmentHomeBinding
+import com.kelompokNizarBersaudara.krambilsawit.databinding.FragmentArticleDetailBinding
 
-class HomeFragment : Fragment() {
-    private var _binding: FragmentHomeBinding? = null
+class ArticleDetail : Fragment() {
+    private var _binding: FragmentArticleDetailBinding? = null
     private val binding get() = _binding!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -20,7 +19,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentArticleDetailBinding.inflate(inflater, container, false)
 
         return binding.root
     }

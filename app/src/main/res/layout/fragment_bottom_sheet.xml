@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".utils.BottomSheetFragment">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:id="@+id/article_bottom_sheet"
+        style="@style/Widget.Material3.BottomSheet"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <com.google.android.material.bottomsheet.BottomSheetDragHandleView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="22dp">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/articles"
+                android:textAlignment="center"
+                android:fontFamily="@font/poppins_bold"
+                android:textSize="16sp"/>
+
+            <Button
+                android:id="@+id/onEdit"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:textSize="15sp"
+                android:text="@string/edit"
+                android:fontFamily="@font/poppins"
+                android:textAlignment="textStart"
+                app:iconPadding="10dp"
+                app:icon="@drawable/edit_24px"/>
+
+            <Button
+                android:id="@+id/onDelete"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:textSize="15sp"
+                android:text="@string/delete"
+                android:fontFamily="@font/poppins"
+                android:textAlignment="textStart"
+                android:textColor="@color/colorAccent"
+                app:iconPadding="10dp"
+                app:iconTint="@color/colorAccent"
+                app:icon="@drawable/delete_24px"/>
+
+            <Button
+                android:id="@+id/onShare"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:textSize="15sp"
+                android:text="@string/share"
+                android:fontFamily="@font/poppins"
+                android:textAlignment="textStart"
+                app:iconPadding="10dp"
+                app:icon="@drawable/share_24px"/>
+        </LinearLayout>
+
+    </FrameLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

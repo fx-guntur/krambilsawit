@@ -2,7 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_home"
-        android:icon="@drawable/baseline_home_24"
+        android:icon="@drawable/home_24px"
+        android:iconTint="@color/black"
         android:title="@string/home"
         android:checkable="true"/>
     <item
@@ -11,12 +12,14 @@
         <menu>
             <item
                 android:id="@+id/nav_article"
-                android:icon="@drawable/baseline_article_24"
+                android:icon="@drawable/article_24px"
+                android:iconTint="@color/black"
                 android:title="@string/article_title"
                 android:checkable="true"/>
             <item
                 android:id="@+id/favourites_item"
-                android:icon="@drawable/baseline_favorite_24"
+                android:icon="@drawable/favorite_24px"
+                android:iconTint="@color/black"
                 android:title="@string/favourites_title"
                 android:checkable="true" />
         </menu>

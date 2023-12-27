@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingVertical="8dp">
+    android:paddingVertical="8dp"
+    android:background="#ffffff">
 
     <TextView
         android:id="@+id/textView"
@@ -13,7 +14,7 @@
         android:layout_marginStart="8dp"
         android:textStyle="bold"
         android:text="@string/kategori_postingan"
-        android:fontFamily="@font/poppins_extrabold"
+        android:fontFamily="@font/poppins_medium"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.045"
@@ -22,35 +23,35 @@
         app:layout_constraintVertical_bias="0.045" />
 
     <Button
-        android:id="@+id/imageView2"
+        android:id="@+id/tagWisata"
         style="@style/Widget.Material3.Button.IconButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         app:iconTint="@color/colorPrimary"
-        app:layout_constraintEnd_toStartOf="@+id/imageView3"
+        app:layout_constraintEnd_toStartOf="@+id/tagKuliner"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:icon="@drawable/baseline_beach_access_24"
+        app:icon="@drawable/beach_access_24px"
         />
 
     <Button
-        android:id="@+id/imageView3"
+        android:id="@+id/tagKuliner"
         style="@style/Widget.Material3.Button.IconButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         app:iconTint="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toStartOf="@+id/imageView4"
+        app:layout_constraintBottom_toBottomOf="@+id/tagWisata"
+        app:layout_constraintEnd_toStartOf="@+id/tagBudaya"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/imageView2"
-        app:icon="@drawable/baseline_fastfood_24"/>
+        app:layout_constraintStart_toEndOf="@+id/tagWisata"
+        app:layout_constraintTop_toTopOf="@+id/tagWisata"
+        app:icon="@drawable/fastfood_24px"/>
 
     <Button
-        android:id="@+id/imageView4"
+        android:id="@+id/tagBudaya"
         style="@style/Widget.Material3.Button.IconButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -58,12 +59,11 @@
         android:fontFamily="@font/poppins_medium"
         android:textAlignment="center"
         app:iconTint="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+        app:layout_constraintBottom_toBottomOf="@+id/tagKuliner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toTopOf="@+id/imageView3"
-        android:src="@drawable/baseline_theater_comedy_24"
-        app:icon="@drawable/baseline_theater_comedy_24"/>
+        app:layout_constraintStart_toEndOf="@+id/tagKuliner"
+        app:layout_constraintTop_toTopOf="@+id/tagKuliner"
+        app:icon="@drawable/theater_comedy_24px"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

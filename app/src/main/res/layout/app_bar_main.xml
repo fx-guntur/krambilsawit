@@ -21,7 +21,8 @@
             app:titleCentered="true"
             app:menu="@menu/top_menu"
             app:navigationContentDescription="hamburger"
-            app:navigationIcon="@drawable/baseline_dehaze_24" />
+            app:navigationIcon="@drawable/menu_24px"
+            app:navigationIconTint="@color/black" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

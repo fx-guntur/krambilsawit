@@ -50,6 +50,8 @@
     <string name="home">Home</string>
     <string name="articles">Articles</string>
     <string name="new_article">New Article</string>
+    <string name="share">Share</string>
+    <string name="artikel_kosong">Artikel Kosong</string>
     <string-array name="tag_article">
         <item>Kuliner</item>
         <item>Budaya</item>

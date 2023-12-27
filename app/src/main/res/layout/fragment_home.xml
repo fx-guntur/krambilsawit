@@ -4,20 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".dashboard.HomeFragment">
+    android:background="#ffffff"
+    tools:context=".ui.HomeFragment">
 
     <include
+        android:id="@+id/category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         layout="@layout/category"
         android:layout_marginBottom="20dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/messageRecyclerView"
+        android:id="@+id/articleRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/linearLayout"
-        android:background="@android:color/white"
         tools:listitem="@layout/article_item_row"
         android:paddingHorizontal="16dp" />
 

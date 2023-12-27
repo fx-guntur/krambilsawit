@@ -5,6 +5,6 @@ data class BlogPost(
     val desc: String? = null,
     val date: String? = null,
     val content: String? = null,
-    val thumbnail: String? = null,
+    var thumbnail: String? = null,
     val tag: String? = null
 )
