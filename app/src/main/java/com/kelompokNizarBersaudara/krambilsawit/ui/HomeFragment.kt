@@ -28,18 +28,6 @@ class HomeFragment : Fragment(), BottomSheetCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val articleRef = firebaseDB.reference.child(PostFragment.ARTICLES_CHILD).orderByChild("date").limitToLast(3)
-        val options = FirebaseRecyclerOptions.Builder<BlogPost>()
-            .setQuery(articleRef, BlogPost::class.java)
-            .build()
-        adapter = BlogPostAdapter(
-            options,
-            this@HomeFragment,
-            ::navigateToArticleDetailFragment)
-        manager = LinearLayoutManager(context)
-        binding.articleRecyclerView.layoutManager = manager
-        binding.articleRecyclerView.adapter = adapter
-
         val tagKuliner = binding.category.tagKuliner
         val tagBudaya = binding.category.tagBudaya
         val tagWisata = binding.category.tagWisata
@@ -55,6 +43,22 @@ class HomeFragment : Fragment(), BottomSheetCallback {
         tagWisata.setOnClickListener {
             goToArticle("Wisata")
         }
+
+        setupRecyclerView()
+    }
+
+    private fun setupRecyclerView() {
+        val articleRef = firebaseDB.reference.child(PostFragment.ARTICLES_CHILD).orderByChild("date").limitToLast(3)
+        val options = FirebaseRecyclerOptions.Builder<BlogPost>()
+            .setQuery(articleRef, BlogPost::class.java)
+            .build()
+        adapter = BlogPostAdapter(
+            options,
+            this@HomeFragment,
+            ::navigateToArticleDetailFragment)
+        manager = LinearLayoutManager(context)
+        binding.articleRecyclerView.layoutManager = manager
+        binding.articleRecyclerView.adapter = adapter
     }
 
     private fun goToArticle(tag: String) {
@@ -62,7 +66,7 @@ class HomeFragment : Fragment(), BottomSheetCallback {
         findNavController().navigate(R.id.action_nav_home_to_nav_article, bundle)
     }
 
-    private fun navigateToArticleDetailFragment(data: BlogPost): Unit {
+    private fun navigateToArticleDetailFragment(data: BlogPost) {
         val bundle = bundleOf(
             "title" to data.title,
             "content" to data.content,
@@ -85,7 +89,7 @@ class HomeFragment : Fragment(), BottomSheetCallback {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         return binding.root

@@ -17,6 +17,7 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.Query
 import com.google.firebase.database.ValueEventListener
 import com.kelompokNizarBersaudara.krambilsawit.BlogPostAdapter
 import com.kelompokNizarBersaudara.krambilsawit.R
@@ -46,53 +47,59 @@ class ArticleFragment : Fragment(), BottomSheetCallback {
 
         val tag = args.tag
         Log.d(TAG, "Tag: $tag")
-
         manager = LinearLayoutManager(context)
-        binding.articleRecyclerView.setLayoutManager(manager)
-        binding.articleRecyclerView.addVeiledItems(15)
+        binding.articleRecyclerView.layoutManager = manager
+//        binding.articleRecyclerView.addVeiledItems(15)
 
-        binding.articleRecyclerView.veil()
+//        binding.articleRecyclerView.veil()
         articleRef = firebaseDB.reference.child(PostFragment.ARTICLES_CHILD)
         var query = articleRef.orderByChild("date")
-        if (tag != null) {
+        if (tag != "all" && tag != null) {
             query = articleRef.orderByChild("tag").equalTo(tag)
         }
 
+        val options = FirebaseRecyclerOptions.Builder<BlogPost>()
+            .setQuery(query, BlogPost::class.java)
+            .build()
+        adapter = BlogPostAdapter(
+            options,
+            this@ArticleFragment,
+            ::navigateToArticleDetailFragment)
+        binding.articleRecyclerView.adapter = adapter
+//                binding.articleRecyclerView.unVeil()
+
+        checkEmptyData(query, tag)
+
+//        if (options.snapshots.size <= 0) {
+//            binding.articleRecyclerView.visibility = View.INVISIBLE
+//            binding.articleNotFound.visibility = View.VISIBLE
+//            if (tag != "all" && tag != null) {
+//                binding.articleNotFound.text = getString(R.string.artikel_kosong) + " Pada Kategori $tag"
+//            }
+//        } else {
+//            binding.articleRecyclerView.visibility = View.VISIBLE
+//            binding.articleNotFound.visibility = View.GONE
+//        }
+    }
+
+    private fun checkEmptyData(query: Query, tag: String?) {
         query.addListenerForSingleValueEvent(object : ValueEventListener {
-            @SuppressLint("SetTextI18n")
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                Log.d(TAG, "Number of items: ${dataSnapshot.childrenCount}")
-
-                val options = FirebaseRecyclerOptions.Builder<BlogPost>()
-                    .setQuery(query, BlogPost::class.java)
-                    .build()
-                adapter = BlogPostAdapter(
-                    options,
-                    this@ArticleFragment,
-                    ::navigateToArticleDetailFragment)
-                binding.articleRecyclerView.setAdapter(adapter)
-                binding.articleRecyclerView.unVeil()
-
-                if (dataSnapshot.childrenCount.toInt() == 0) {
-                    binding.articleRecyclerView.visibility = View.INVISIBLE
-                    binding.articleNotFound.visibility = View.VISIBLE
-                    if (tag != null) {
-                        binding.articleNotFound.text = getString(R.string.artikel_kosong) + " Pada Kategori $tag"
-                    }
-                } else {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
                     binding.articleRecyclerView.visibility = View.VISIBLE
                     binding.articleNotFound.visibility = View.GONE
+                } else {
+                    binding.articleRecyclerView.visibility = View.INVISIBLE
+                    binding.articleNotFound.visibility = View.VISIBLE
+                    if (tag != "all" && tag != null) {
+                        val defaultText = getString(R.string.artikel_kosong)
+                        binding.articleNotFound.text = "$defaultText Pada Kategori $tag"
+                    }
                 }
             }
 
-            @SuppressLint("SetTextI18n")
-            override fun onCancelled(databaseError: DatabaseError) {
-                Log.e(TAG, "Error fetching articles: ${databaseError.message}")
-                binding.articleRecyclerView.visibility = View.INVISIBLE
-                binding.articleNotFound.visibility = View.VISIBLE
-                if (tag != null) {
-                    binding.articleNotFound.text = getString(R.string.artikel_kosong) + " Pada Kategori $tag"
-                }
+            override fun onCancelled(error: DatabaseError) {
+                Log.d(TAG, "onCancelled: ${error.message}")
             }
         })
     }
@@ -102,7 +109,7 @@ class ArticleFragment : Fragment(), BottomSheetCallback {
         findNavController().navigate(R.id.action_nav_article_to_nav_post_insert, bundle)
     }
 
-    private fun navigateToArticleDetailFragment(data: BlogPost): Unit {
+    private fun navigateToArticleDetailFragment(data: BlogPost) {
         val bundle = bundleOf(
             "title" to data.title,
             "content" to data.content,
@@ -114,18 +121,20 @@ class ArticleFragment : Fragment(), BottomSheetCallback {
 
     override fun onPause() {
         adapter?.stopListening()
+//        binding.articleRecyclerView.unVeil()
         super.onPause()
     }
 
     override fun onResume() {
         super.onResume()
         adapter?.startListening()
+//        binding.articleRecyclerView.veil()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentArticleBinding.inflate(inflater, container, false)
 
         return binding.root

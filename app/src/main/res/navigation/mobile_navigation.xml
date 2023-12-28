@@ -39,7 +39,8 @@
         <argument
             android:name="tag"
             app:argType="string"
-            app:nullable="true" />
+            app:nullable="true"
+            android:defaultValue="all" />
         <action
             android:id="@+id/action_nav_article_to_nav_post_insert"
             app:destination="@id/nav_post">

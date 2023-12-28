@@ -7,28 +7,28 @@
     tools:context=".ui.ArticleFragment"
     android:background="#ffffff">
 
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/articleRecyclerView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        tools:listitem="@layout/article_item_row"-->
-<!--        android:paddingHorizontal="16dp" />-->
-
-    <com.skydoves.androidveil.VeilRecyclerFrameView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/articleRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingHorizontal="16dp"
-        app:veilFrame_layout="@layout/article_item_row"
-        app:veilFrame_veiled="true"
-        app:veilFrame_shimmerEnable="true"
-        app:veilFrame_baseColor="#E0E0E0"
-        app:veilFrame_highlightColor="#D0D0D0"
-        app:veilFrame_baseAlpha="0.6"
-        app:veilFrame_highlightAlpha="1.0"
-        app:veilFrame_radius="8dp"
-        app:veilFrame_isItemWrapContentHeight="true"
-        app:veilFrame_isItemWrapContentWidth="true" />
+        tools:listitem="@layout/article_item_row"
+        android:paddingHorizontal="16dp" />
+
+<!--    <com.skydoves.androidveil.VeilRecyclerFrameView-->
+<!--        android:id="@+id/articleRecyclerView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:paddingHorizontal="16dp"-->
+<!--        app:veilFrame_layout="@layout/article_item_row"-->
+<!--        app:veilFrame_veiled="true"-->
+<!--        app:veilFrame_shimmerEnable="true"-->
+<!--        app:veilFrame_baseColor="#E0E0E0"-->
+<!--        app:veilFrame_highlightColor="#D0D0D0"-->
+<!--        app:veilFrame_baseAlpha="0.6"-->
+<!--        app:veilFrame_highlightAlpha="1.0"-->
+<!--        app:veilFrame_radius="8dp"-->
+<!--        app:veilFrame_isItemWrapContentHeight="true"-->
+<!--        app:veilFrame_isItemWrapContentWidth="true" />-->
 
     <TextView
         android:id="@+id/article_not_found"
