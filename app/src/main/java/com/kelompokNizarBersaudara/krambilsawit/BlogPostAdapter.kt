@@ -16,8 +16,8 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.kelompokNizarBersaudara.krambilsawit.model.BlogPost
 import com.kelompokNizarBersaudara.krambilsawit.databinding.ArticleItemRowBinding
-import com.kelompokNizarBersaudara.krambilsawit.utils.BottomSheetCallback
-import com.kelompokNizarBersaudara.krambilsawit.utils.BottomSheetFragment
+import com.kelompokNizarBersaudara.krambilsawit.utils.bottomSheet.BottomSheetCallback
+import com.kelompokNizarBersaudara.krambilsawit.utils.bottomSheet.BottomSheetFragment
 
 class BlogPostAdapter(
     private val options: FirebaseRecyclerOptions<BlogPost>,

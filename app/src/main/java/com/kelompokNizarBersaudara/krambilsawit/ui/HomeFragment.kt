@@ -14,8 +14,8 @@ import com.kelompokNizarBersaudara.krambilsawit.BlogPostAdapter
 import com.kelompokNizarBersaudara.krambilsawit.R
 import com.kelompokNizarBersaudara.krambilsawit.databinding.FragmentHomeBinding
 import com.kelompokNizarBersaudara.krambilsawit.model.BlogPost
-import com.kelompokNizarBersaudara.krambilsawit.utils.BottomSheetCallback
-import com.kelompokNizarBersaudara.krambilsawit.utils.BottomSheetFragment
+import com.kelompokNizarBersaudara.krambilsawit.utils.bottomSheet.BottomSheetCallback
+import com.kelompokNizarBersaudara.krambilsawit.utils.bottomSheet.BottomSheetFragment
 import com.kelompokNizarBersaudara.krambilsawit.utils.FirebaseUtils.firebaseDB
 
 class HomeFragment : Fragment(), BottomSheetCallback {
@@ -104,7 +104,7 @@ class HomeFragment : Fragment(), BottomSheetCallback {
 
     override fun onEditClicked(view: BottomSheetFragment, ref: String) {
         val bundle = bundleOf("mode" to "UPDATE", "postId" to ref)
-        findNavController().navigate(R.id.action_nav_home_to_nav_post, bundle)
+        findNavController().navigate(R.id.action_nav_home_to_nav_post_update, bundle)
         view.dismiss()
     }
 

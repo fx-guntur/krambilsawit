@@ -29,6 +29,7 @@ import java.util.Date
 import com.kelompokNizarBersaudara.krambilsawit.utils.FirebaseUtils.firebaseStorage
 import com.kelompokNizarBersaudara.krambilsawit.utils.FirebaseUtils.firebaseUser
 import com.kelompokNizarBersaudara.krambilsawit.extensions.Extensions.toast
+import androidx.navigation.fragment.navArgs
 
 class PostFragment : Fragment() {
     private var _binding: FragmentPostBinding? = null
@@ -48,6 +49,8 @@ class PostFragment : Fragment() {
     private var mode: String? = null
     private var articleOldData: BlogPost? = null
 
+    private val args: PostFragmentArgs by navArgs()
+
     private val openDocument = registerForActivityResult(MyOpenDocumentContract()) { uri ->
         uri?.let { onImageSelected(it) }
     }
@@ -57,10 +60,10 @@ class PostFragment : Fragment() {
 
         imageUploadView = binding.imageView
 
-        mode = arguments?.getString("mode")
+        mode = args.mode
 
         if (mode == "UPDATE") {
-            postId = arguments?.getString("postId")
+            postId = args.postId
             if (postId != null) {
                 fetchPostData(postId!!)
             } else {
@@ -298,7 +301,7 @@ class PostFragment : Fragment() {
     }
 
     private fun backToArticle() {
-        findNavController().navigate(R.id.nav_article)
+        findNavController().navigate(R.id.action_nav_post_to_nav_article)
     }
 
     override fun onDestroy() {

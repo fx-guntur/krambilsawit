@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -21,8 +22,8 @@ import com.kelompokNizarBersaudara.krambilsawit.BlogPostAdapter
 import com.kelompokNizarBersaudara.krambilsawit.R
 import com.kelompokNizarBersaudara.krambilsawit.databinding.FragmentArticleBinding
 import com.kelompokNizarBersaudara.krambilsawit.model.BlogPost
-import com.kelompokNizarBersaudara.krambilsawit.utils.BottomSheetCallback
-import com.kelompokNizarBersaudara.krambilsawit.utils.BottomSheetFragment
+import com.kelompokNizarBersaudara.krambilsawit.utils.bottomSheet.BottomSheetCallback
+import com.kelompokNizarBersaudara.krambilsawit.utils.bottomSheet.BottomSheetFragment
 import com.kelompokNizarBersaudara.krambilsawit.utils.FirebaseUtils.firebaseDB
 
 class ArticleFragment : Fragment(), BottomSheetCallback {
@@ -33,6 +34,8 @@ class ArticleFragment : Fragment(), BottomSheetCallback {
     private lateinit var manager: LinearLayoutManager
     private lateinit var articleRef: DatabaseReference
 
+    private val args: ArticleFragmentArgs by navArgs()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -41,7 +44,7 @@ class ArticleFragment : Fragment(), BottomSheetCallback {
             navigateToPostFragment()
         }
 
-        val tag = arguments?.getString("tag")
+        val tag = args.tag
         Log.d(TAG, "Tag: $tag")
 
         manager = LinearLayoutManager(context)
@@ -96,7 +99,7 @@ class ArticleFragment : Fragment(), BottomSheetCallback {
 
     private fun navigateToPostFragment() {
         val bundle = bundleOf("mode" to "INSERT")
-        findNavController().navigate(R.id.action_nav_article_to_nav_post, bundle)
+        findNavController().navigate(R.id.action_nav_article_to_nav_post_insert, bundle)
     }
 
     private fun navigateToArticleDetailFragment(data: BlogPost): Unit {
@@ -145,7 +148,7 @@ class ArticleFragment : Fragment(), BottomSheetCallback {
 
     override fun onEditClicked(view: BottomSheetFragment, ref: String) {
         val bundle = bundleOf("mode" to "UPDATE", "postId" to ref)
-        findNavController().navigate(R.id.action_nav_article_to_nav_post, bundle)
+        findNavController().navigate(R.id.action_nav_article_to_nav_post_update, bundle)
         view.dismiss()
     }
 
