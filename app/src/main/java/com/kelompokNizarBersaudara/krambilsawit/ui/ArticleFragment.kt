@@ -1,6 +1,7 @@
 package com.kelompokNizarBersaudara.krambilsawit.ui
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -20,9 +21,11 @@ import com.kelompokNizarBersaudara.krambilsawit.BlogPostAdapter
 import com.kelompokNizarBersaudara.krambilsawit.R
 import com.kelompokNizarBersaudara.krambilsawit.databinding.FragmentArticleBinding
 import com.kelompokNizarBersaudara.krambilsawit.model.BlogPost
+import com.kelompokNizarBersaudara.krambilsawit.utils.BottomSheetCallback
+import com.kelompokNizarBersaudara.krambilsawit.utils.BottomSheetFragment
 import com.kelompokNizarBersaudara.krambilsawit.utils.FirebaseUtils.firebaseDB
 
-class ArticleFragment : Fragment() {
+class ArticleFragment : Fragment(), BottomSheetCallback {
     private var _binding: FragmentArticleBinding? = null
     private val binding get() = _binding!!
 
@@ -48,7 +51,6 @@ class ArticleFragment : Fragment() {
         binding.articleRecyclerView.veil()
         articleRef = firebaseDB.reference.child(PostFragment.ARTICLES_CHILD)
         var query = articleRef.orderByChild("date")
-
         if (tag != null) {
             query = articleRef.orderByChild("tag").equalTo(tag)
         }
@@ -61,7 +63,10 @@ class ArticleFragment : Fragment() {
                 val options = FirebaseRecyclerOptions.Builder<BlogPost>()
                     .setQuery(query, BlogPost::class.java)
                     .build()
-                adapter = BlogPostAdapter(options)
+                adapter = BlogPostAdapter(
+                    options,
+                    this@ArticleFragment,
+                    ::navigateToArticleDetailFragment)
                 binding.articleRecyclerView.setAdapter(adapter)
                 binding.articleRecyclerView.unVeil()
 
@@ -94,6 +99,16 @@ class ArticleFragment : Fragment() {
         findNavController().navigate(R.id.action_nav_article_to_nav_post, bundle)
     }
 
+    private fun navigateToArticleDetailFragment(data: BlogPost): Unit {
+        val bundle = bundleOf(
+            "title" to data.title,
+            "content" to data.content,
+            "thumbnail" to data.thumbnail,
+            "tag" to data.tag,
+            "date" to data.date)
+        findNavController().navigate(R.id.nav_article_detail, bundle)
+    }
+
     override fun onPause() {
         adapter?.stopListening()
         super.onPause()
@@ -120,5 +135,29 @@ class ArticleFragment : Fragment() {
 
     companion object {
         private const val TAG = "ArticleFragment"
+    }
+
+    override fun onDeleteClicked(view: BottomSheetFragment, ref: String) {
+        val articleRef = firebaseDB.reference.child(PostFragment.ARTICLES_CHILD).child(ref)
+        articleRef.removeValue()
+        view.dismiss()
+    }
+
+    override fun onEditClicked(view: BottomSheetFragment, ref: String) {
+        val bundle = bundleOf("mode" to "UPDATE", "postId" to ref)
+        findNavController().navigate(R.id.action_nav_article_to_nav_post, bundle)
+        view.dismiss()
+    }
+
+    override fun onShareClicked(view: BottomSheetFragment, item: BlogPost) {
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, item.title + "\n\n" + item.desc)
+            type = "text/plain"
+        }
+
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
+        view.dismiss()
     }
 }

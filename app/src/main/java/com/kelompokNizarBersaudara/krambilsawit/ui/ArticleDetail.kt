@@ -13,6 +13,13 @@ class ArticleDetail : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val title = arguments?.getString("title")
+        val content = arguments?.getString("content")
+        val tag = arguments?.getString("tag")
+        val date = arguments?.getString("date")
+        val thumbnail = arguments?.getString("thumbnail")
+
+
     }
 
     override fun onCreateView(
@@ -27,5 +34,9 @@ class ArticleDetail : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    companion object {
+        private const val TAG = "ArticleDetailFragment"
     }
 }

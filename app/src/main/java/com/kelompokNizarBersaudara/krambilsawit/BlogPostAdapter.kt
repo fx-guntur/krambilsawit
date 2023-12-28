@@ -1,10 +1,9 @@
 package com.kelompokNizarBersaudara.krambilsawit
 
 import android.annotation.SuppressLint
-import android.net.Uri
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -17,10 +16,13 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.kelompokNizarBersaudara.krambilsawit.model.BlogPost
 import com.kelompokNizarBersaudara.krambilsawit.databinding.ArticleItemRowBinding
+import com.kelompokNizarBersaudara.krambilsawit.utils.BottomSheetCallback
 import com.kelompokNizarBersaudara.krambilsawit.utils.BottomSheetFragment
 
 class BlogPostAdapter(
-    private val options: FirebaseRecyclerOptions<BlogPost>
+    private val options: FirebaseRecyclerOptions<BlogPost>,
+    private val callback: BottomSheetCallback,
+    private val navigateToArticleDetailFragment: (BlogPost) -> Unit
 ) : FirebaseRecyclerAdapter<BlogPost, BlogPostAdapter.ArticleItemRowViewHolder>(options) {
     private var _binding: ArticleItemRowBinding? = null
     private val binding get() = _binding!!
@@ -37,13 +39,24 @@ class BlogPostAdapter(
 
         holder.ivOption.setOnClickListener {
             Log.d(TAG, "onBindViewHolder: clicked $position")
-            showBottomSheet(binding, model)
+            val ref = getRef(position)
+            showBottomSheet(binding, options.snapshots[position], ref.key!!)
+        }
+
+        holder.container.setOnClickListener {
+            navigateToArticleDetailFragment(options.snapshots[position])
         }
     }
 
-    private fun showBottomSheet(binding: ArticleItemRowBinding, data: BlogPost) {
+    private fun showBottomSheet(binding: ArticleItemRowBinding, item: BlogPost, ref: String) {
         val bottomSheet = BottomSheetFragment()
-//        bottomSheet.setData(data)
+        val args = Bundle().apply {
+            putString("title", item.title)
+        }
+        bottomSheet.arguments = args
+        bottomSheet.setCallback(callback)
+        bottomSheet.setRef(ref)
+        bottomSheet.setItem(item)
         bottomSheet.show(
             (binding.root.context as AppCompatActivity).supportFragmentManager,
             BottomSheetFragment.TAG)
@@ -53,6 +66,7 @@ class BlogPostAdapter(
         ViewHolder(binding.root) {
 
         val ivOption = binding.ivOption
+        val container = binding.containerArticleItemRow
 
         fun bind(item: BlogPost) {
             if (item.thumbnail != "") {

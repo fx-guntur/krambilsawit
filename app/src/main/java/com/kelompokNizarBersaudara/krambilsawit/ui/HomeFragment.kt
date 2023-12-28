@@ -1,5 +1,6 @@
 package com.kelompokNizarBersaudara.krambilsawit.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,9 +14,11 @@ import com.kelompokNizarBersaudara.krambilsawit.BlogPostAdapter
 import com.kelompokNizarBersaudara.krambilsawit.R
 import com.kelompokNizarBersaudara.krambilsawit.databinding.FragmentHomeBinding
 import com.kelompokNizarBersaudara.krambilsawit.model.BlogPost
+import com.kelompokNizarBersaudara.krambilsawit.utils.BottomSheetCallback
+import com.kelompokNizarBersaudara.krambilsawit.utils.BottomSheetFragment
 import com.kelompokNizarBersaudara.krambilsawit.utils.FirebaseUtils.firebaseDB
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), BottomSheetCallback {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
@@ -25,11 +28,14 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val articleRef = firebaseDB.reference.child(PostFragment.ARTICLES_CHILD).limitToLast(3)
+        val articleRef = firebaseDB.reference.child(PostFragment.ARTICLES_CHILD).orderByChild("date").limitToLast(3)
         val options = FirebaseRecyclerOptions.Builder<BlogPost>()
             .setQuery(articleRef, BlogPost::class.java)
             .build()
-        adapter = BlogPostAdapter(options)
+        adapter = BlogPostAdapter(
+            options,
+            this@HomeFragment,
+            ::navigateToArticleDetailFragment)
         manager = LinearLayoutManager(context)
         binding.articleRecyclerView.layoutManager = manager
         binding.articleRecyclerView.adapter = adapter
@@ -56,6 +62,16 @@ class HomeFragment : Fragment() {
         findNavController().navigate(R.id.action_nav_home_to_nav_article, bundle)
     }
 
+    private fun navigateToArticleDetailFragment(data: BlogPost): Unit {
+        val bundle = bundleOf(
+            "title" to data.title,
+            "content" to data.content,
+            "thumbnail" to data.thumbnail,
+            "tag" to data.tag,
+            "date" to data.date)
+        findNavController().navigate(R.id.nav_article_detail, bundle)
+    }
+
     override fun onPause() {
         adapter.stopListening()
         super.onPause()
@@ -78,5 +94,29 @@ class HomeFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    override fun onDeleteClicked(view: BottomSheetFragment, ref: String) {
+        val articleRef = firebaseDB.reference.child(PostFragment.ARTICLES_CHILD).child(ref)
+        articleRef.removeValue()
+        view.dismiss()
+    }
+
+    override fun onEditClicked(view: BottomSheetFragment, ref: String) {
+        val bundle = bundleOf("mode" to "UPDATE", "postId" to ref)
+        findNavController().navigate(R.id.action_nav_home_to_nav_post, bundle)
+        view.dismiss()
+    }
+
+    override fun onShareClicked(view: BottomSheetFragment, item: BlogPost) {
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, item.title + "\n\n" + item.desc)
+            type = "text/plain"
+        }
+
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
+        view.dismiss()
     }
 }

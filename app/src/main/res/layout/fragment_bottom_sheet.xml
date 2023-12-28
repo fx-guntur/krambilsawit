@@ -8,11 +8,9 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/article_bottom_sheet"
-        style="@style/Widget.Material3.BottomSheet"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+        style="@style/Widget.Material3.BottomSheet.Modal">
 
         <com.google.android.material.bottomsheet.BottomSheetDragHandleView
             android:layout_width="match_parent"
@@ -30,8 +28,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/articles"
                 android:textAlignment="center"
-                android:fontFamily="@font/poppins_bold"
-                android:textSize="16sp"/>
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="16sp"
+                android:layout_marginTop="5dp"/>
 
             <Button
                 android:id="@+id/onEdit"
@@ -57,9 +56,10 @@
                 android:fontFamily="@font/poppins"
                 android:textAlignment="textStart"
                 android:textColor="@color/colorAccent"
+                android:background="@color/colorAccent"
                 app:iconPadding="10dp"
                 app:iconTint="@color/colorAccent"
-                app:icon="@drawable/delete_24px"/>
+                app:icon="@drawable/delete_24px" />
 
             <Button
                 android:id="@+id/onShare"

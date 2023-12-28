@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AutoCompleteTextView
 import android.widget.Button
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textfield.TextInputEditText
@@ -18,6 +19,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.StorageReference
 import com.kelompokNizarBersaudara.krambilsawit.MyOpenDocumentContract
+import com.kelompokNizarBersaudara.krambilsawit.R
 import com.kelompokNizarBersaudara.krambilsawit.databinding.FragmentPostBinding
 import com.kelompokNizarBersaudara.krambilsawit.extensions.Extensions.showNotification
 import com.kelompokNizarBersaudara.krambilsawit.model.BlogPost
@@ -61,6 +63,10 @@ class PostFragment : Fragment() {
             postId = arguments?.getString("postId")
             if (postId != null) {
                 fetchPostData(postId!!)
+            } else {
+                Log.e(TAG, "Post ID is null.")
+                requireActivity().toast("Gagal Update Artikel")
+                backToArticle()
             }
         }
 
@@ -160,13 +166,27 @@ class PostFragment : Fragment() {
             inputComplete.text.toString()
         )
 
+        val user = firebaseUser
         val articleRef = firebaseDB.reference.child(ARTICLES_CHILD).child(postId!!)
         articleRef.setValue(updatedArticleData)
             .addOnSuccessListener {
-                Log.d(TAG, "Article updated successfully")
+                if (imageUpload == null) {
+                    notifSuccess()
+                    clearInput()
+                    backToArticle()
+                    return@addOnSuccessListener
+                }
+
+                val storageReference = firebaseStorage
+                    .getReference(user!!.uid)
+                    .child(postId!!)
+                    .child(imageUpload!!.lastPathSegment!!)
+
+                putImageInStorage(storageReference, imageUpload!!, postId, updatedArticleData)
             }
             .addOnFailureListener { e ->
                 Log.e(TAG, "Error updating article: $e")
+                requireActivity().toast("Gagal Update Artikel")
             }
     }
 
@@ -195,12 +215,25 @@ class PostFragment : Fragment() {
     private fun saveArticleData(articleData: BlogPost, key: String?) {
         val articleChild = firebaseDB.reference.child(ARTICLES_CHILD)
         articleChild.child(key!!).setValue(articleData)
-        requireActivity().toast("Berhasil Post Artikel")
-        requireActivity().showNotification(
-            requireActivity(),
-            "Post Artikel",
-            "Kamu Berhasil upload artikel baru")
+        notifSuccess()
         clearInput()
+        backToArticle()
+    }
+
+    private fun notifSuccess() {
+        if (mode == "UPDATE") {
+            requireActivity().toast("Berhasil Update Post Artikel")
+            requireActivity().showNotification(
+                requireActivity(),
+                "Update Post Artikel",
+                "Kamu Berhasil update artikel")
+        } else {
+            requireActivity().toast("Berhasil Post Artikel")
+            requireActivity().showNotification(
+                requireActivity(),
+                "Post Artikel",
+                "Kamu Berhasil upload artikel baru")
+        }
     }
 
     private fun onImageSelected(uri: Uri) {
@@ -262,6 +295,10 @@ class PostFragment : Fragment() {
         _binding = FragmentPostBinding.inflate(inflater, container, false)
 
         return binding.root
+    }
+
+    private fun backToArticle() {
+        findNavController().navigate(R.id.nav_article)
     }
 
     override fun onDestroy() {
