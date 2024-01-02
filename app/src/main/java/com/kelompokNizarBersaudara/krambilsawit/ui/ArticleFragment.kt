@@ -1,6 +1,5 @@
 package com.kelompokNizarBersaudara.krambilsawit.ui
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -10,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -35,8 +33,6 @@ class ArticleFragment : Fragment(), BottomSheetCallback {
     private lateinit var manager: LinearLayoutManager
     private lateinit var articleRef: DatabaseReference
 
-    private val args: ArticleFragmentArgs by navArgs()
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -45,7 +41,7 @@ class ArticleFragment : Fragment(), BottomSheetCallback {
             navigateToPostFragment()
         }
 
-        val tag = args.tag
+        val tag = arguments?.getString("tag")
         Log.d(TAG, "Tag: $tag")
         manager = LinearLayoutManager(context)
         binding.articleRecyclerView.layoutManager = manager

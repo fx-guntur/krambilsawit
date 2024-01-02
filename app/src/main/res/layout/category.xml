@@ -24,17 +24,20 @@
 
     <Button
         android:id="@+id/tagWisata"
-        style="@style/Widget.Material3.Button.IconButton"
+        style="@style/Widget.Material3.Button.TextButton.Icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:text="@string/wisata"
+        android:fontFamily="@font/poppins_medium"
+        android:textSize="12sp"
         app:iconTint="@color/colorPrimary"
         app:layout_constraintEnd_toStartOf="@+id/tagKuliner"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:icon="@drawable/beach_access_24px"
-        />
+        app:iconGravity="top"/>
 
     <Button
         android:id="@+id/tagKuliner"
@@ -42,28 +45,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
+        android:text="@string/kuliner"
+        android:fontFamily="@font/poppins_medium"
+        android:textSize="12sp"
         app:iconTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="@+id/tagWisata"
         app:layout_constraintEnd_toStartOf="@+id/tagBudaya"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tagWisata"
         app:layout_constraintTop_toTopOf="@+id/tagWisata"
-        app:icon="@drawable/fastfood_24px"/>
+        app:icon="@drawable/fastfood_24px"
+        app:iconGravity="top"/>
 
     <Button
         android:id="@+id/tagBudaya"
         style="@style/Widget.Material3.Button.IconButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15sp"
+        android:text="Budaya"
         android:fontFamily="@font/poppins_medium"
-        android:textAlignment="center"
+        android:textSize="12sp"
         app:iconTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="@+id/tagKuliner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tagKuliner"
         app:layout_constraintTop_toTopOf="@+id/tagKuliner"
-        app:icon="@drawable/theater_comedy_24px"/>
+        app:icon="@drawable/theater_comedy_24px"
+        app:iconGravity="top"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,7 +29,6 @@ import java.util.Date
 import com.kelompokNizarBersaudara.krambilsawit.utils.FirebaseUtils.firebaseStorage
 import com.kelompokNizarBersaudara.krambilsawit.utils.FirebaseUtils.firebaseUser
 import com.kelompokNizarBersaudara.krambilsawit.extensions.Extensions.toast
-import androidx.navigation.fragment.navArgs
 
 class PostFragment : Fragment() {
     private var _binding: FragmentPostBinding? = null
@@ -49,8 +48,6 @@ class PostFragment : Fragment() {
     private var mode: String? = null
     private var articleOldData: BlogPost? = null
 
-    private val args: PostFragmentArgs by navArgs()
-
     private val openDocument = registerForActivityResult(MyOpenDocumentContract()) { uri ->
         uri?.let { onImageSelected(it) }
     }
@@ -60,10 +57,10 @@ class PostFragment : Fragment() {
 
         imageUploadView = binding.imageView
 
-        mode = args.mode
+        mode = arguments?.getString("mode")
 
         if (mode == "UPDATE") {
-            postId = args.postId
+            postId = arguments?.getString("postId")
             if (postId != null) {
                 fetchPostData(postId!!)
             } else {

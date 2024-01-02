@@ -12,28 +12,32 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
-import com.kelompokNizarBersaudara.krambilsawit.BlogPostAdapter
 import com.kelompokNizarBersaudara.krambilsawit.databinding.FragmentArticleDetailBinding
 
 class ArticleDetailFragment : Fragment() {
     private var _binding: FragmentArticleDetailBinding? = null
     private val binding get() = _binding!!
 
-    private val args: ArticleDetailFragmentArgs by navArgs()
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val title = args.title!!
-        val content = args.content!!
-        val tag = args.tag!!
-        val date = args.date!!
-        val thumbnail = args.thumbnail!!
+        val title = arguments?.getString("title")
+        val content = arguments?.getString("content")
+        val tag = arguments?.getString("tag")
+        val date = arguments?.getString("date")
+        val thumbnail = arguments?.getString("thumbnail")
 
-        binding.tvJudulArtikel.text = title
-        binding.tvTag.text = tag
-        binding.tvDescArtikel.text = content
-        binding.tvTanggal.text = date
-        loadImageIntoView(binding.imageView, thumbnail)
+        if (title?.isNotEmpty() == true &&
+            content?.isNotEmpty() == true &&
+            tag?.isNotEmpty() == true &&
+            date?.isNotEmpty() == true &&
+            thumbnail?.isNotEmpty() == true)
+        {
+            binding.tvJudulArtikel.text = title
+            binding.tvTag.text = tag
+            binding.tvDescArtikel.text = content
+            binding.tvTanggal.text = date
+            loadImageIntoView(binding.imageView, thumbnail)
+        }
     }
 
     private fun loadImageIntoView(view: ImageView, url: String, isCircular: Boolean = false) {

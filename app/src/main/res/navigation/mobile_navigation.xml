@@ -12,69 +12,28 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_nav_home_to_nav_article"
-            app:destination="@id/nav_article">
-            <argument
-                android:name="tag"
-                app:argType="string"
-                app:nullable="true" />
-        </action>
+            app:destination="@id/nav_article" />
         <action
             android:id="@+id/action_nav_home_to_nav_post_update"
-            app:destination="@id/nav_post">
-            <argument
-                android:name="mode"
-                app:argType="string"
-                android:defaultValue="UPDATE" />
-            <argument
-                android:name="postId"
-                app:argType="string"
-                app:nullable="true" />
-        </action>
+            app:destination="@id/nav_post" />
     </fragment>
     <fragment
         android:id="@+id/nav_article"
         android:name="com.kelompokNizarBersaudara.krambilsawit.ui.ArticleFragment"
         android:label="Article"
         tools:layout="@layout/fragment_article" >
-        <argument
-            android:name="tag"
-            app:argType="string"
-            app:nullable="true"
-            android:defaultValue="all" />
         <action
             android:id="@+id/action_nav_article_to_nav_post_insert"
-            app:destination="@id/nav_post">
-            <argument
-                android:name="mode"
-                app:argType="string"
-                android:defaultValue="INSERT" />
-        </action>
+            app:destination="@id/nav_post" />
         <action
             android:id="@+id/action_nav_article_to_nav_post_update"
-            app:destination="@id/nav_post">
-            <argument
-                android:name="mode"
-                app:argType="string"
-                android:defaultValue="UPDATE" />
-            <argument
-                android:name="postId"
-                app:argType="string"
-                app:nullable="true" />
-        </action>
+            app:destination="@id/nav_post" />
     </fragment>
     <fragment
         android:id="@+id/nav_post"
         android:name="com.kelompokNizarBersaudara.krambilsawit.ui.PostFragment"
         android:label="Post Article"
         tools:layout="@layout/fragment_post" >
-        <argument
-            android:name="mode"
-            app:argType="string"
-            android:defaultValue="INSERT" />
-        <argument
-            android:name="postId"
-            app:argType="string"
-            app:nullable="true" />
         <action
             android:id="@+id/action_nav_post_to_nav_article"
             app:destination="@id/nav_article" />
@@ -83,26 +42,5 @@
         android:id="@+id/nav_article_detail"
         android:name="com.kelompokNizarBersaudara.krambilsawit.ui.ArticleDetailFragment"
         android:label="Article Detail"
-        tools:layout="@layout/fragment_article_detail">
-        <argument
-            android:name="title"
-            app:argType="string"
-            app:nullable="true" />
-        <argument
-            android:name="content"
-            app:argType="string"
-            app:nullable="true" />
-        <argument
-            android:name="tag"
-            app:argType="string"
-            app:nullable="true" />
-        <argument
-            android:name="date"
-            app:argType="string"
-            app:nullable="true" />
-        <argument
-            android:name="thumbnail"
-            app:argType="string"
-            app:nullable="true" />
-    </fragment>
+        tools:layout="@layout/fragment_article_detail" />
 </navigation>

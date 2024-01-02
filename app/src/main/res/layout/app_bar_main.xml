@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:expandedTitleGravity="top"
-        app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+        app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+        android:background="#ffffff">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
