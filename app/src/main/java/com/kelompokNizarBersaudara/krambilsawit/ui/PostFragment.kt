@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
@@ -263,7 +264,8 @@ class PostFragment : Fragment() {
         articleOldData = postData
         binding.judulArtikel.setText(postData.title)
         binding.isiArtikel.setText(postData.content)
-        binding.kategoriArtikel.setText(postData.tag)
+        binding.kategoriArtikel.setText(postData.tag, false)
+
 
         if (postData.thumbnail != null) {
             binding.imageView.visibility = View.VISIBLE
