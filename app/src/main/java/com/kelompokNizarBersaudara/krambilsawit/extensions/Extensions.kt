@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -25,6 +26,7 @@ object Extensions {
 
     fun Context.showNotification(activity: Activity, title: String, message: String) {
         createNotificationChannel()
+        checkPermission(activity)
 
         val builder = NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.notifications_24px)
@@ -34,19 +36,24 @@ object Extensions {
             .setAutoCancel(true)
 
         with(NotificationManagerCompat.from(this)) {
-            if (ActivityCompat.checkSelfPermission(
-                    activity,
-                    Manifest.permission.POST_NOTIFICATIONS
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                ActivityCompat.requestPermissions(
-                    activity,
-                    arrayOf(android.Manifest.permission.ACCESS_NOTIFICATION_POLICY),
-                    NOTIFICATION_PERMISSION_REQUEST_CODE
-                )
-                return
-            }
+            checkPermission(activity)
             notify(NOTIFICATION_ID, builder.build())
+        }
+    }
+
+    private fun checkPermission(activity: Activity) {
+        if (ActivityCompat.checkSelfPermission(
+                activity,
+                Manifest.permission.POST_NOTIFICATIONS
+            ) != PackageManager.PERMISSION_GRANTED &&
+            Build.VERSION_CODES.TIRAMISU == Build.VERSION.SDK_INT
+        ) {
+            ActivityCompat.requestPermissions(
+                activity,
+                arrayOf(android.Manifest.permission.POST_NOTIFICATIONS),
+                NOTIFICATION_PERMISSION_REQUEST_CODE
+            )
+            return
         }
     }
 
